@@ -14,16 +14,20 @@ from flask import Flask
 from threading import Thread
 import os
 
-app = Flask('')
+app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Bot Running"
+    return "ALFU BOMBER RUNNING"
 
 def run():
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 10000)))
+    app.run(
+        host='0.0.0.0',
+        port=int(os.environ.get("PORT", 10000)),
+        use_reloader=False
+    )
 
-Thread(target=run).start()
+Thread(target=run, daemon=True).start()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
